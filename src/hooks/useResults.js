@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import yelp from '../api/yelp';
+import useLocation from '../hooks/useLocation';
 
 export default () => {
   const [results, setResults] = useState([]);
@@ -7,15 +8,21 @@ export default () => {
 
   const searchApi = async (searchTerm) => {
     try {
+      let data = await useLocation();
       const response = await yelp.get('/search', {
         params: {
           limit: 50,
-          term: searchTerm,
-          location: 'san jose',
+          term: searchTerm ? searchTerm : '',
+          // latitude: data.coords.latitude,
+          // longitude: data.coords.longitude,
+          latitude: 38.882071,
+          longitude: -77.11184,
+          radius: 40000,
         },
       });
       setResults(response.data.businesses);
     } catch (err) {
+      console.log('error is', err);
       setErrorMessage('Something went wrong');
     }
   };

@@ -15,7 +15,7 @@ const navigator = createStackNavigator(
   {
     initialRouteName: 'Search',
     defaultNavigationOptions: {
-      title: 'Foody Kathmandu',
+      title: 'Foodyfull',
       headerTitleAlign: 'center',
       headerTintColor: 'white',
       headerStyle: {
